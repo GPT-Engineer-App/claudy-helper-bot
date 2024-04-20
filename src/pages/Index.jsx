@@ -10,11 +10,18 @@ const Index = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
 
-  const botResponses = ["Hello! How can I assist you today?", "Can I help you with something else?", "What else can I do for you?", "Feel free to ask any questions.", "I'm here to help, just let me know what you need."];
-
   const handleSendMessage = () => {
-    const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
-    const newMessages = [...messages, { sender: "user", text: userInput }, { sender: "bot", text: randomResponse }];
+    let botResponse;
+    if (userInput.toLowerCase().includes("hello")) {
+      botResponse = "Hi there! How can I assist you today?";
+    } else if (userInput.toLowerCase().includes("help")) {
+      botResponse = "Sure, I'm here to help. What do you need assistance with?";
+    } else if (userInput.toLowerCase().includes("thank you")) {
+      botResponse = "You're welcome! Anything else I can do for you?";
+    } else {
+      botResponse = "I'm sorry, I didn't understand that. Could you please rephrase?";
+    }
+    const newMessages = [...messages, { sender: "user", text: userInput }, { sender: "bot", text: botResponse }];
     setMessages(newMessages);
     setUserInput("");
   };
