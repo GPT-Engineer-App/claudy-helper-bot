@@ -1,4 +1,4 @@
-import { Box, Text, VStack, Input, Button, useColorMode, useColorModeValue, IconButton, Image } from "@chakra-ui/react";
+import { Box, Text, VStack, Input, Button, useColorMode, useColorModeValue, IconButton, Image, useEffect } from "@chakra-ui/react";
 import { FaSun, FaMoon, FaPaperPlane } from "react-icons/fa";
 import { useState } from "react";
 
@@ -10,8 +10,11 @@ const Index = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
 
+  const botResponses = ["Hello! How can I assist you today?", "Can I help you with something else?", "What else can I do for you?", "Feel free to ask any questions.", "I'm here to help, just let me know what you need."];
+
   const handleSendMessage = () => {
-    const newMessages = [...messages, { sender: "user", text: userInput }, { sender: "bot", text: "Hello! How can I assist you today?" }];
+    const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+    const newMessages = [...messages, { sender: "user", text: userInput }, { sender: "bot", text: randomResponse }];
     setMessages(newMessages);
     setUserInput("");
   };
